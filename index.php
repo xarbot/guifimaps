@@ -203,7 +203,7 @@ input:checked + .slider:before {
 		</div>
 	</td>
 	<td valign="middle">
-	Mostrar rutes predeterminades</br>
+	Rutes predeterminades&nbsp;
 	<label class="switch">
   	<input id="rutes" name="rutes" type="checkbox">
   	<div class="slider round"></div>
