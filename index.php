@@ -108,6 +108,66 @@ $mysqli = mysql_link ();
 }
 
 .close:hover { background: #00d9ff; }
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 18px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 15px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
  </style>
  
  </head>
@@ -141,7 +201,15 @@ $mysqli = mysql_link ();
                 	   <div id="suggestions"></div>
 	                </form>
 		</div>
-	<td>
+	</td>
+	<td valign="middle">
+	Mostrar rutes predeterminades</br>
+	<label class="switch">
+  	<input id="rutes" name="rutes" type="checkbox">
+  	<div class="slider round"></div>
+</label>
+</select> 
+	</td>
 <?php 
 date_default_timezone_set('UTC');
 if(isset($_GET["bounds"])){
@@ -189,9 +257,9 @@ if(isset($_GET["service"])){
 }
 
 	echo "<td align='right' valign='middle'>Data de la captura: &nbsp;".date('d/m/Y H:i:s', $timestamp)."</td>";
-	echo "<td align='right'><a href=\"#openModal\"><img width=\"30px\" src=\"./alert_icon.png\"></a></td>";?>
+	echo "<td align='right'><a href=\"#openModal\"><img width=\"30px\" src=\"./icon/alert_icon.png\"></a></td>";?>
         <td align='right'>
-                        <a href="./index.php"><img width="30px" src="home.png"></a>
+                        <a href="./index.php"><img width="30px" src="./icon/home.png"></a>
         </td></tr></table>
 	<div id="openModal" class="modalDialog">
 		<div>
@@ -278,8 +346,10 @@ if(isset($_GET["service"])){
 	<div id="map"></div>
  <script>
 map = new L.Map('map');	// create the tile layer with correct attribution
+attribution = map.attributionControl;
+attribution.setPrefix('<a target="_blank" href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+var osmAttrib='Map data © <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors';
 var osm = new L.TileLayer(osmUrl, {minZoom: 2, maxZoom: 19, attribution: osmAttrib}); 
 map.addLayer(osm);
 L.control.scale().addTo(map);

@@ -24,34 +24,34 @@ $result2 = $mysqli->query($sql2);
 echo "var info = L.control({position: 'bottomright'});\n";
 echo "info.onAdd = function (map) {\n";
 echo "	this._div = L.DomUtil.create('div', 'info');\n";
-echo "	this._div.innerHTML ='<img width=\"30\" src=\"./outinet_icon.png\">&nbsp;<span>Internet gateway</span><br/>';\n";
-echo "  this._div.innerHTML +='<img width=\"30\" src=\"./outmesh_icon.png\">&nbsp;<span>Mesh gateway</span><br/>';\n";
-echo "  this._div.innerHTML +='<img width=\"30\" src=\"./outinetmesh_icon.png\">&nbsp;<span>Internet and Mesh gateway</span><br/>';\n";
-echo "  this._div.innerHTML +='<img width=\"30\" src=\"./mesh_icon.png\">&nbsp;<span>Mesh device</span><br/>';\n";
+echo "	this._div.innerHTML ='<img width=\"30\" src=\"./icon/outinet_icon.png\">&nbsp;<span>Internet gateway</span><br/>';\n";
+echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/outmesh_icon.png\">&nbsp;<span>Mesh gateway</span><br/>';\n";
+echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/outinetmesh_icon.png\">&nbsp;<span>Internet and Mesh gateway</span><br/>';\n";
+echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/mesh_icon.png\">&nbsp;<span>Mesh device</span><br/>';\n";
 echo "	return this._div;\n";
 echo "};\n";
 echo "info.addTo(map);\n";
 
 echo "var meshIcon = L.icon({\n";
-echo "    iconUrl: 'mesh_icon.png',\n";
+echo "    iconUrl: './icon/mesh_icon.png',\n";
 echo "    iconSize:     [30, 30], // size of the icon\n";
 echo "    iconAnchor:   [15, 33], // point of the icon which will correspond to marker's location\n";
 echo "    popupAnchor:  [15, -30] // point from which the popup should open relative to the iconAnchor\n";
 echo "});\n";
 echo "var outmeshIcon = L.icon({\n";
-echo "    iconUrl: 'outmesh_icon.png',\n";
+echo "    iconUrl: './icon/outmesh_icon.png',\n";
 echo "    iconSize:     [30, 30], // size of the icon\n";
 echo "    iconAnchor:   [18, 30], // point of the icon which will correspond to marker's location\n";
 echo "    popupAnchor:  [15, -30] // point from which the popup should open relative to the iconAnchor\n";
 echo "});\n";
 echo "var outinetIcon = L.icon({\n";
-echo "    iconUrl: 'outinet_icon.png',\n";
+echo "    iconUrl: './icon/outinet_icon.png',\n";
 echo "    iconSize:     [30, 30], // size of the icon\n";
 echo "    iconAnchor:   [18, 30], // point of the icon which will correspond to marker's location\n";
 echo "    popupAnchor:  [15, -30] // point from which the popup should open relative to the iconAnchor\n";
 echo "});\n";
 echo "var outinetmeshIcon = L.icon({\n";
-echo "    iconUrl: 'outinetmesh_icon.png',\n";
+echo "    iconUrl: './icon/outinetmesh_icon.png',\n";
 echo "    iconSize:     [30, 30], // size of the icon\n";
 echo "    iconAnchor:   [18, 30], // point of the icon which will correspond to marker's location\n";
 echo "    popupAnchor:  [15, -30] // point from which the popup should open relative to the iconAnchor\n";
@@ -140,7 +140,10 @@ while($row2 = $result2->fetch_assoc()) {
 	}
 	$html=$html."Data de la captura: <b>".date('d/m/Y H:i:s', $row2['timestamp_json'])."</b>";;
 	echo "marker".$row2['uid'].".bindPopup('".$html."');\n";
-	$markers[]=$row2["uid"];
+	$markers[$h][0]=$row2["uid"];
+	$markers[$h][1]=$row2['name'];
+	$markers[$h][2]=$html;
+	$h++;
 	echo "markers.addLayer(marker".$row2['uid'].");\n";
   }
 }
@@ -297,12 +300,17 @@ while($row4 = $result4->fetch_assoc()) {
 }
 //Ara pinto els paths
 //Primer inetpaths
-foreach ($markers as $markeruid){
+foreach ($markers as $marker){
+	$markeruid=$marker[0];
+	$name=$marker[1];
+	$html=$marker[2];
 	$pathinet= array();
 	$pathcom=array();
 	echo "var gwinet".$markeruid." = new L.layerGroup();\n";
 	echo "var gwcom".$markeruid." = new L.layerGroup();\n";
         echo "marker".$markeruid.".on(\"popupopen\", function(e) {\n";
+		echo "if (document.getElementById(\"rutes\").checked){\n";
+		echo "marker".$markeruid.".setPopupContent('".$name."');\n";
                 $sql4 = "SELECT * from inet_paths where timestamp_captura='".$timestamp."' and uid='".$markeruid."'";
                 $result4 = $mysqli->query($sql4);
                 $inetorigen=$markeruid;
@@ -341,10 +349,17 @@ foreach ($markers as $markeruid){
                         }
 			echo "gwcom".$markeruid.".addTo(map);\n";
                 }
+		echo "};\n";
         echo "});\n";
         echo "marker".$markeruid.".on(\"popupclose\", function(e) {\n";
-		echo  "map.removeLayer(gwinet".$markeruid.");\n";
-		echo  "map.removeLayer(gwcom".$markeruid.");\n";
+		echo "marker".$markeruid.".unbindPopup()\n";
+		echo "marker".$markeruid.".bindPopup('".$html."');\n";
+		echo "if(typeof gwinet".$markeruid." != \"undefined\"){\n";
+			echo  "map.removeLayer(gwinet".$markeruid.");\n";
+		echo "};\n";
+		echo "if(typeof gwcom".$markeruid." != \"undefined\"){\n";
+			echo  "map.removeLayer(gwcom".$markeruid.");\n";
+		echo "};\n";
         echo "});\n";
 
 }
