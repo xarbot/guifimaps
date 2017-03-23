@@ -1,0 +1,34 @@
+<?php
+	include dirname(__FILE__).'/../functions.php';
+	date_default_timezone_set('UTC');
+	$mysqli = mysql_link ();
+
+        $sql = "SELECT timestamp_captura from nodes order by timestamp_captura DESC";
+        $result = $mysqli->query($sql);
+        $row=$result->fetch_assoc();
+        $last_timestamp=$row["timestamp_captura"];
+	echo $last_timestamp."\n";
+	echo "-------------------------------------------\n";
+
+	$sql2 = "SELECT distinct(ip),tipus,uid FROM ip where tipus like 'ipv4' and ip like '%/32' and timestamp_captura='".$last_timestamp."'";
+	$result2 = $mysqli->query($sql2);
+	while($row2 = $result2->fetch_assoc()) {
+		echo "Analitzant IP: ".substr($row2['ip'], 0, -3)."\n";
+		$uid=$row2["uid"];
+
+                $session = new SNMP(SNMP::VERSION_1, substr($row2['ip'], 0, -3), "public");
+		//$session = new SNMP(SNMP::VERSION_1, "10.0.30.1", "public");
+                $fulltree = $session->walk(".");
+                //print_r($fulltree);
+		list($brossa,$uptime)=explode(")",$fulltree["DISMAN-EVENT-MIB::sysUpTimeInstance"]);
+		//echo $uptime;
+		//exit();
+		$uptime=trim($uptime);
+		echo $uptime."\n";
+                $session->close();
+
+		$sql3 = "update nodes set uptime='".$uptime."' where uid='".$uid."' and timestamp_captura='".$last_timestamp."'";
+		$result3 = $mysqli->query($sql3);
+		echo "--------------------------------------------------------------\n";
+	}
+?>
