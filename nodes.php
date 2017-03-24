@@ -28,6 +28,8 @@ echo "	this._div.innerHTML ='<img width=\"30\" src=\"./icon/outinet_icon.png\">&
 echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/outmesh_icon.png\">&nbsp;<span>Mesh gateway</span><br/>';\n";
 echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/outinetmesh_icon.png\">&nbsp;<span>Internet and Mesh gateway</span><br/>';\n";
 echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/mesh_icon.png\">&nbsp;<span>Mesh device</span><br/>';\n";
+echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/mesh_gw.png\">&nbsp;<span>Mesh path gateway</span><br/>';\n";
+echo "  this._div.innerHTML +='<img width=\"30\" src=\"./icon/inet_gw.png\">&nbsp;<span>Internet path gateway</span><br/>';\n";
 echo "	return this._div;\n";
 echo "};\n";
 echo "info.addTo(map);\n";
