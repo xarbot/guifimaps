@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid');
 include 'functions.php';
 $mysqli = mysql_link ();
 

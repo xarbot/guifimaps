@@ -4,7 +4,7 @@ header( 'Content-type: text/html; charset=iso-8859-1' );
 $search = $_GET['node_nom'];
 $timestamp= $_GET['timestamp'];
 if ($search!=""){ 
-	date_default_timezone_set('UTC');
+	date_default_timezone_set('Europe/Madrid');
 	$mysqli = mysql_link ();
 
 	$timestamp=$_GET["timestamp"];

@@ -7,7 +7,7 @@ $canal=$_GET["canal"];
 $timestamp=$_GET["timestamp"];
 $captures=$_GET["captures"];
 $mysqli = mysql_link ();
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid');
 
 $dataY1 = array();
 $dataY2 = array();

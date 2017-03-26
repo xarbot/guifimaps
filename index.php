@@ -211,7 +211,7 @@ input:checked + .slider:before {
 </select> 
 	</td>
 <?php 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid'); 
 if(isset($_GET["bounds"])){
         $bounds=$_GET["bounds"];
 }else{

@@ -1,6 +1,6 @@
 <?php
 include 'functions.php';
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid');
 $mysqli = mysql_link ();
 
 $uid=$_GET["uid"];

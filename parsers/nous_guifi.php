@@ -1,6 +1,6 @@
 <?php
 	include dirname(__FILE__).'/../functions.php';
-	date_default_timezone_set('UTC');
+	date_default_timezone_set('Europe/Madrid');
 	$mysqli = mysql_link ();
         $sql = "SELECT timestamp_captura from nodes order by timestamp_captura DESC";
         $result = $mysqli->query($sql);

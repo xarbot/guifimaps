@@ -16,7 +16,7 @@ if ($_GET["dia"]==""){
 	header("Content-type: application/json");
 	echo json_encode($dates);
 }else{
-	date_default_timezone_set('UTC');
+	date_default_timezone_set('Europe/Madrid');
 	$mysqli = mysql_link ();
 	list($dia,$mes,$any)=explode("/",$_GET["dia"]);
 	$data_inici=mktime("00","00","00",$mes,$dia,$any);
