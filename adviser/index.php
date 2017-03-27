@@ -73,7 +73,11 @@
 	eval($str);
         $paths = $dijkstra['paths'];
         $pathsCosts = $dijkstra['pathsCosts'];
-        echo "<b>Ruta de sortida optima cap a Guifi per la antena: ".$nom_node."</b><br/><br/>";
+	if ($mode=="inet"){
+	        echo "<b>Ruta de sortida optima cap a Internet per la antena: ".$nom_node."</b><br/><br/>";
+	}else{
+		echo "<b>Ruta de sortida optima cap a Guifi per la antena: ".$nom_node."</b><br/><br/>";
+	}
 	$ruta_optima=1000000;
         foreach($paths as $nodeId => $nodePred) {
 	  //Si el node desde on sortim es gateway
