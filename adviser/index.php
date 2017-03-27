@@ -42,12 +42,19 @@
                 $desti = mysqli_num_rows($result);
 
 		if ($origen>0&&$desti>0){
-			if ((abs($row2['senyal'])!=0)&&(abs($row2['senyal'])<80)){
-		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".abs($row2['senyal']).");";
+			if ((abs($row2['senyal'])!=0)){
+				$max_link="20";
+				$pes=round(100*($max_link/abs($row2['senyal'])));
+		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.");";
        	        		eval($str2);
 			}else{
 				if (round(abs($row2['ample']))>0){
-					$pes=round(150-abs($row2['ample']));
+					if (($row2['canal']!="eth")&&($row2['canal']!="gre")){
+						$max_link="60";
+					}else{
+						$max_link="120";
+					}
+					$pes=round(100*(abs($row2['ample'])/$max_link));
         	        	        $str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
 		                        eval($str2);
 				}
