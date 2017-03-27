@@ -137,8 +137,8 @@ while($row2 = $result2->fetch_assoc()) {
 	        }
 	}
 	$html=$html.$ip32;
-	$html=$html."<a href=\"./adviser/?name=".$row2['name']."\" target=\"_blank\">Sortida optima cap a Guifi.Net</a><br>";
-	$html=$html."<a href=\"./adviser/?name=".$row2['name']."&mode=inet\" target=\"_blank\">Sortida optima cap a Internet</a><br>";
+	$html=$html."<a href=\"./adviser/?name=".$row2['name']."&timestamp=".$timestamp."\" target=\"_blank\">Sortida optima cap a Guifi.Net</a><br>";
+	$html=$html."<a href=\"./adviser/?name=".$row2['name']."&timestamp=".$timestamp."&mode=inet\" target=\"_blank\">Sortida optima cap a Internet</a><br>";
 	if ($row2["uptime"]!=""){
 		$html=$html."Uptime: <b>".$row2["uptime"]."</b><br/>";
 	}
