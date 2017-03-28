@@ -69,7 +69,7 @@
 					if ($pes<0){
 						$pes=20;
 					}
-					$pes=$pes+hop;
+					$pes=$pes+$hop;
         	        	        $str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
 		                        eval($str2);
 				}
