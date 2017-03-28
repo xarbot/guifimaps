@@ -40,11 +40,15 @@
                 $sql = "SELECT * FROM maps.nodes where uid='".$row2['nodeTouid']."' and timestamp_captura like '".$timestamp."'";
                 $result = $mysqli->query($sql);
                 $desti = mysqli_num_rows($result);
+                $best_link="30";
+                $worst_link="80";
 
 		if ($origen>0&&$desti>0){
-			if ((abs($row2['senyal'])!=0)){
-				$max_link="20";
-				$pes=100-round(100*($max_link/abs($row2['senyal'])));
+			if ((abs($row2['senyal'])!=0)&&(abs($row2['senyal'])<$worst_link)){
+				$percent=100/($worst_link-$best_link);
+				//Es considera que worst_link es 0% de senyal i que best_link 100% senyal
+				//Per tant, per cada db que m'allunyo dels best_link estic perdent percent de senyal
+				$pes=round($percent*(abs($row2['senyal'])-$best_link));
 		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
        	        		eval($str2);
 			}else{
