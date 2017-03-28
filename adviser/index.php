@@ -50,7 +50,7 @@
 				//Per tant, per cada db que m'allunyo dels best_link estic perdent percent de senyal
 				$pes=round($percent*(abs($row2['senyal'])-$best_link));
 				if ($pes<0){
-					$pes=1;
+					$pes=20;
 				}
 		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
        	        		eval($str2);
@@ -63,7 +63,7 @@
 					}
 					$pes=100-round(100*(abs($row2['ample'])/$max_link));
 					if ($pes<0){
-						$pes=1;
+						$pes=20;
 					}
         	        	        $str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
 		                        eval($str2);
