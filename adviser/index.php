@@ -41,7 +41,7 @@
                 $result = $mysqli->query($sql);
                 $desti = mysqli_num_rows($result);
                 $best_link="30";
-                $worst_link="85";
+                $worst_link="82";
 
 		if ($origen>0&&$desti>0){
 			if ((abs($row2['senyal'])!=0)&&(abs($row2['senyal'])<$worst_link)){
