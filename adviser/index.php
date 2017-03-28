@@ -44,8 +44,8 @@
 		if ($origen>0&&$desti>0){
 			if ((abs($row2['senyal'])!=0)){
 				$max_link="20";
-				$pes=round(100*($max_link/abs($row2['senyal'])));
-		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.");";
+				$pes=100-round(100*($max_link/abs($row2['senyal'])));
+		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
        	        		eval($str2);
 			}else{
 				if (round(abs($row2['ample']))>0){
@@ -54,7 +54,7 @@
 					}else{
 						$max_link="120";
 					}
-					$pes=round(100*(abs($row2['ample'])/$max_link));
+					$pes=100-round(100*(abs($row2['ample'])/$max_link));
         	        	        $str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
 		                        eval($str2);
 				}
