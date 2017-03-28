@@ -42,7 +42,10 @@
                 $desti = mysqli_num_rows($result);
                 $best_link="30";
                 $worst_link="82";
-
+		//Augmentem en 15 a tots els  links
+		//Aixo provocara tot i que en termes absoluts un cami sigui mes curt si te mes salts
+		//Que un altre cami es vegi penalitzat
+		$hop= "15";
 		if ($origen>0&&$desti>0){
 			if ((abs($row2['senyal'])!=0)&&(abs($row2['senyal'])<$worst_link)){
 				$percent=100/($worst_link-$best_link);
@@ -52,6 +55,7 @@
 				if ($pes<0){
 					$pes=20;
 				}
+				$pes=$pes+$hop;
 		        	$str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
        	        		eval($str2);
 			}else{
@@ -65,6 +69,7 @@
 					if ($pes<0){
 						$pes=20;
 					}
+					$pes=$pes+hop;
         	        	        $str2="\$node".$row2['nodeuid']."->addNeighbour(\$node".$row2['nodeTouid'].",".$pes.",false);";
 		                        eval($str2);
 				}
