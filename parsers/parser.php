@@ -119,6 +119,7 @@ foreach ($malles as $filename) {
 			foreach ($row["data"]["ipv4"] as $ip) {
 				$tipus="ipv4";
 				$sql2 = "INSERT INTO ip(uid,ip,tipus,timestamp_captura) VALUES ('$uid', '$ip', '$tipus', '$timestamp')";
+				echo $sql2."\n";
 				$mysqli->query($sql2);
 			}
 		}

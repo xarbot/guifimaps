@@ -29,6 +29,19 @@
 
 		$sql3 = "update nodes set uptime='".$uptime."' where uid='".$uid."' and timestamp_captura='".$last_timestamp."'";
 		$result3 = $mysqli->query($sql3);
+
+		$i=1;
+		$num_interficies=str_replace("INTEGER: ","",$fulltree["IF-MIB::ifNumber.0"])+1;
+		while ($i<$num_interficies){
+			$nom_interficie=str_replace("STRING: ","",$fulltree["IF-MIB::ifDescr.".$i]);
+			$inbytes=str_replace("Counter32: ","",$fulltree["IF-MIB::ifInOctets.".$i]);
+			$outbytes=str_replace("Counter32: ","",$fulltree["IF-MIB::ifOutOctets.".$i]);
+			$sql4 = "insert into interface_volume(uid,interface,inbytes,outbytes,timestamp_captura) values ('".$uid."','".$nom_interficie."','".$inbytes."','".$outbytes."','".$last_timestamp."')";
+			echo $sql4."\n";
+			$result4 = $mysqli->query($sql4);
+			$i++;
+		}
+
 		echo "--------------------------------------------------------------\n";
 	}
 ?>
