@@ -49,7 +49,7 @@ while ($row=$result->fetch_assoc()){
         	$resultat["nodes"][$row["uid"]]["links"][$row2["nodeTouid"]]["channel"]=$row2["canal"];
 		$resultat["nodes"][$row["uid"]]["links"][$row2["nodeTouid"]]["signal"]=$row2["senyal"];
 		$resultat["nodes"][$row["uid"]]["links"][$row2["nodeTouid"]]["ping"]=$row2["ping"];
-		$resultat["nodes"][$row["uid"]]["links"][$row2["nodeTouid"]]["bandwith"]=$row2["ample"];
+		$resultat["nodes"][$row["uid"]]["links"][$row2["nodeTouid"]]["bandwidth"]=$row2["ample"];
 	}
 
         //IP's
