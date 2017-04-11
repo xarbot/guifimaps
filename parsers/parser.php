@@ -78,9 +78,9 @@ foreach ($malles as $filename) {
                         $gwmeshuid="0";
                 }
                 if (array_key_exists('qmpversion', $row["data"])){
-                        $qmpversion=$k.$row["data"]["qmpversion"];
+                        $qmpversion=$row["data"]["qmpversion"];
                 }else{
-                        $qmpversion="0";
+                        $qmpversion="";
                 }
 		if (array_key_exists('lon', $row)){
 			$lon=ltrim($row["lon"],'0');
