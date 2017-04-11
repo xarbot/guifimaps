@@ -27,6 +27,7 @@ while ($row=$result->fetch_assoc()){
 	$resultat["nodes"][$row["uid"]]["lat"]=$row["lat"];
 	$resultat["nodes"][$row["uid"]]["uptime"]=$row["uptime"];
 	$resultat["nodes"][$row["uid"]]["system"]=$row["system"];
+	$resultat["nodes"][$row["uid"]]["firmware"]=$row["qmpversion"];
 	
 	//Inet path
 	$sql2 = "SELECT * from inet_paths where uid = '".$row["uid"]."' and timestamp_captura = '".$timestamp."'";

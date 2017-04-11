@@ -77,6 +77,11 @@ foreach ($malles as $filename) {
                 }else{
                         $gwmeshuid="0";
                 }
+                if (array_key_exists('qmpversion', $row["data"])){
+                        $qmpversion=$k.$row["data"]["qmpversion"];
+                }else{
+                        $qmpversion="0";
+                }
 		if (array_key_exists('lon', $row)){
 			$lon=ltrim($row["lon"],'0');
 		}else{
@@ -104,7 +109,7 @@ foreach ($malles as $filename) {
 		if ($uid==""){
 			$uid=hexdec(crc32($row["name"]));
 		}
-		$sql="INSERT INTO nodes(uid,id,gwmeshid,gwinetid,gdev,name,system,lon,lat,zona,timestamp_captura,timestamp_json) VALUES ('$uid', '$id', '".$gwmeshuid."','".$gwinetuid."', '$gdev', '$name', '$system', '$lon', '$lat','".$filename[1]."', '$timestamp','".$timestamp_json."')";
+		$sql="INSERT INTO nodes(uid,id,gwmeshid,gwinetid,gdev,name,system,qmpversion,lon,lat,zona,timestamp_captura,timestamp_json) VALUES ('$uid', '$id', '".$gwmeshuid."','".$gwinetuid."', '$gdev', '$name', '$system','$qmpversion' , '$lon', '$lat','".$filename[1]."', '$timestamp','".$timestamp_json."')";
 		$mysqli->query($sql);
 		if (count($gwpath_uid)>0){
 			$sqltmp="insert into inet_paths(uid,gwpath,timestamp_captura) values ('".$uid."','".json_encode($gwpath_uid,JSON_FORCE_OBJECT)."','".$timestamp."')";
