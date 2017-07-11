@@ -148,6 +148,7 @@
 							if (($uid!="")&&($touid!="")){
 				                                echo "actualitzem links".$host."-".$row["id"]."\n";
 								$sql2 = "update adjacencies set rxrate='".$link['attributes']['rxRate']."' where nodeTouid='".$touid."' and nodeuid='".$uid."' and timestamp_captura='".$last_timestamp."'";
+								echo $sql2."\n";
                 	               	                        $result2=$mysqli->query($sql2);
 							}
                                        	                break;
@@ -171,6 +172,7 @@
                                                         if (($uid!="")&&($touid!="")){
 				                                echo "actualitzem links".$host."-".$row["id"]."\n";
 								$sql2 = "update adjacencies set senyal='".$link['attributes']['signal']."' where nodeTouid='".$touid."' and nodeuid='".$uid."' and timestamp_captura='".$last_timestamp."'";
+								echo $sql2."\n";
                 	                                       	$result2=$mysqli->query($sql2);
 							}
                                                         break;

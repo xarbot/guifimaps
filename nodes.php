@@ -156,7 +156,7 @@ $sql4 = "SELECT distinct canal from adjacencies where timestamp_captura='".$time
 $result4 = $mysqli->query($sql4);
 echo "var baseLayers = new Array();\n";
 $html="";
-$paleta_colors= array ('#F57E00','#e22eba','#11ad34','#f0c20c','#7297e6','#afad18','#2f6c3d','#30b9b3','#0078a8','#6b5e93','#C4942B','#ff4959','#7278a5','#c97f70','#c7e008');
+$paleta_colors= array ('#F57E00','#e22eba','#11ad34','#f0c20c','#7297e6','#afad18','#2f6c3d','#30b9b3','#0078a8','#6b5e93','#C4942B','#ff4959','#7278a5','#c7e008','#c97f70');
 $color_debils="#828180";
 $i=0;
 echo "var capes = new Array();\n";

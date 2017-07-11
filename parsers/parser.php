@@ -13,6 +13,11 @@ $malles = array(
 	    array('http://dsg.ac.upc.edu/qmpbll/download_json.php','8'),
             array('http://dsg.ac.upc.edu/qmphorta/download_json.php','9'),
 	);
+//$json = file_get_contents('http://dsg.ac.upc.edu/qmpquesa/download_json.php');
+//$data = json_decode($json, true);
+//var_dump($data);
+//exit();
+
 $k=0;
 $timestamp="";
 foreach ($malles as $filename) {
@@ -147,6 +152,7 @@ foreach ($malles as $filename) {
 				$uid_vei=$k.$vei["nodeTouid"];
 				$id_vei=$k.$vei["nodeTo"];
 				$canal=$vei["data"]["channel"];
+				$power=$vei["data"]["powerav"];
 				if ($canal=="?"){
 					$canal="eth";
 				}
@@ -167,7 +173,8 @@ foreach ($malles as $filename) {
 					$ample=0;
 				}
 				if (!excluded_channel($canal)){
-					$sql3="INSERT INTO adjacencies(nodeuid,node,nodeTouid,nodeTo,canal,ping,ample,timestamp_captura) VALUES ('$uid','$id','$uid_vei', '$id_vei', '$canal', '$ping', '$ample', '$timestamp')";       
+					$sql3="INSERT INTO adjacencies(nodeuid,node,nodeTouid,nodeTo,canal,ping,ample,senyal,timestamp_captura) VALUES ('$uid','$id','$uid_vei', '$id_vei', '$canal', '$ping', '$ample','$power', '$timestamp')";       
+					echo $sql3."\n";					
 			        	$mysqli->query($sql3);
 				}
 			}	
