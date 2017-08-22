@@ -8,7 +8,7 @@
         $row=$result->fetch_assoc();
         $last_timestamp=$row["timestamp_captura"];
         $data_cerca=date('Y-m-d', strtotime('-2 day', time()));
-        $url_map='http://libremap.guifi.net/api/routers_by_mtime?startkey="'.$data_cerca.'"';
+        $url_map='http://libremap.net/api/routers_by_mtime?startkey="'.$data_cerca.'"';
         $json = file_get_contents($url_map);  
 
 	$data = json_decode($json, true);
