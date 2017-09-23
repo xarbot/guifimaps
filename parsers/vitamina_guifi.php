@@ -14,7 +14,7 @@
 	$data = json_decode($json, true);
 	$nodes= array();
 	foreach ($data["rows"] as $row) {
-                $json2 = file_get_contents('http://libremap.guifi.net/api/router/'.$row["id"]);   
+                $json2 = file_get_contents('http://libremap.net/api/router/'.$row["id"]);   
                 $data2 = json_decode($json2, true);
 		$nodes[$row["id"]]=$data2;
 		if ($data2["community"]=="qMp.cat"){

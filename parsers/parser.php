@@ -12,6 +12,7 @@ $malles = array(
 	    array('http://dsg.ac.upc.edu/qmpsa/download_json.php','7'),
 	    array('http://dsg.ac.upc.edu/qmpbll/download_json.php','8'),
             array('http://dsg.ac.upc.edu/qmphorta/download_json.php','9'),
+	    array('http://dsg.ac.upc.edu/qmpguinardo/download_json.php','12'),
 	);
 //$json = file_get_contents('http://dsg.ac.upc.edu/qmpquesa/download_json.php');
 //$data = json_decode($json, true);
@@ -52,15 +53,17 @@ foreach ($malles as $filename) {
                 }else{
                    //El node ha estat abans en alguna captura, reutilitzem el ID, pero cal donar-lo d'alta
                    //Agafem sempre el uid mes baix per assegurarnos que agafem, si hi ha, el del Llorens
-                   $sql2 = "select * from nodes where name='".$name."' order by uid asc";
-                   $result2=$mysqli->query($sql2);
-                   if ($result2->num_rows>0){
-			$row2 = $result2->fetch_assoc();
-			$uid = $row2["uid"];
-                   }else{
+                   //$sql2 = "select * from nodes where name='".$name."' order by uid asc";
+		   //echo $sql2."\n";
+                   //$result2=$mysqli->query($sql2);
+                   //if ($result2->num_rows>0){
+			//$row2 = $result2->fetch_assoc();
+			//$uid = $row2["uid"];
+                   //}else{
                        //Es node nou
-                       $uid=$k.$row["uid"];
-                   }
+                       //$uid=$k.$row["uid"];
+			$uid=hexdec(crc32($name));
+                   //}
                 }
         	if (array_key_exists('gdev', $row["data"])){
                 	$gdev=$row["data"]["gdev"];
@@ -158,9 +161,11 @@ foreach ($malles as $filename) {
 				}
 				if ($canal=="gre-bcnllngudc"||$canal=="gre-bcnpale"){
 					$canal="gre";
+					$power=0;
 				}
         	                if ($canal=="br-lan"||$canal=="lan_12"||$canal=="mesh_e0_12"||$canal=="mesh_e1_12"||$canal=="ptp_e0"||$canal=="ptp_e1"){
                 	                $canal="eth";
+					$power=0;
                                 }
 				if (array_key_exists('rtt', $vei["data"])){
 					$ping=$vei["data"]["rtt"];
@@ -182,7 +187,7 @@ foreach ($malles as $filename) {
 	}
 }
 $mysqli->close();
-excluded_links($timestamp);
+//excluded_links($timestamp);
 update_gateways($timestamp)
 ?>
 
