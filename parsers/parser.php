@@ -61,8 +61,8 @@ foreach ($malles as $filename) {
 			//$uid = $row2["uid"];
                    //}else{
                        //Es node nou
-                       //$uid=$k.$row["uid"];
-			$uid=hexdec(crc32($name));
+                       $uid=$k."000".$row["uid"];
+		       //$uid=hexdec(crc32($name));
                    //}
                 }
         	if (array_key_exists('gdev', $row["data"])){
@@ -76,12 +76,12 @@ foreach ($malles as $filename) {
 			$system="";
 		}
                 if (array_key_exists('gwuid', $row["data"])){
-                        $gwinetuid=$k.$row["data"]["gwuid"];
+                        $gwinetuid=$k."000".$row["data"]["gwuid"];
                 }else{
                         $gwinetuid="0";
                 }
                 if (array_key_exists('community_gwuid', $row["data"])){
-                        $gwmeshuid=$k.$row["data"]["community_gwuid"];
+                        $gwmeshuid=$k."000".$row["data"]["community_gwuid"];
                 }else{
                         $gwmeshuid="0";
                 }
@@ -104,14 +104,14 @@ foreach ($malles as $filename) {
                 if (array_key_exists('gwpath_uid', $row["data"])){
                         $tmp=$row["data"]["gwpath_uid"];
 			foreach ($tmp as $tmpid){
-				$gwpath_uid[]=$k.strval($tmpid);
+				$gwpath_uid[]=$k."000".strval($tmpid);
 			}
                 }
 		$community_gwpath_uid= array();
                 if (array_key_exists('community_gwpath_uid', $row["data"])){
                         $tmp=$row["data"]["community_gwpath_uid"];
                         foreach ($tmp as $tmpid){
-                                $community_gwpath_uid[]=$k.strval($tmpid);
+                                $community_gwpath_uid[]=$k."000".strval($tmpid);
                         }
                 }  
 		if ($uid==""){
@@ -152,8 +152,8 @@ foreach ($malles as $filename) {
 		}
 		if (array_key_exists('adjacencies', $row)){
 			foreach ($row["adjacencies"] as $vei) {
-				$uid_vei=$k.$vei["nodeTouid"];
-				$id_vei=$k.$vei["nodeTo"];
+				$uid_vei=$k."000".$vei["nodeTouid"];
+				$id_vei=$k."000".$vei["nodeTo"];
 				$canal=$vei["data"]["channel"];
 				$power=$vei["data"]["powerav"];
 				if ($canal=="?"){
