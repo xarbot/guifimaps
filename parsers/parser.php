@@ -187,7 +187,7 @@ foreach ($malles as $filename) {
 	}
 }
 $mysqli->close();
-//excluded_links($timestamp);
+excluded_links($timestamp);
 update_gateways($timestamp)
 ?>
 
