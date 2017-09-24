@@ -159,6 +159,7 @@ foreach ($malles as $filename) {
 				$power=$vei["data"]["powerav"];
 				if ($canal=="?"){
 					$canal="eth";
+					$power=0;
 				}
 				if ($canal=="gre-bcnllngudc"||$canal=="gre-bcnpale"){
 					$canal="gre";
