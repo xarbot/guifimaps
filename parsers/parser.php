@@ -155,8 +155,12 @@ foreach ($malles as $filename) {
 			foreach ($row["adjacencies"] as $vei) {
 				$uid_vei=$k."000".$vei["nodeTouid"];
 				$id_vei=$k."000".$vei["nodeTo"];
-				$canal=$vei["data"]["channel"];
-				$power=$vei["data"]["powerav"];
+				if (array_key_exists('channel', $vei["data"])){
+					$canal=$vei["data"]["channel"];
+				}
+				if (array_key_exists('powerav', $vei["data"])){
+					$power=$vei["data"]["powerav"];
+				}
 				if ($canal=="?"){
 					$canal="eth";
 					$power=0;
