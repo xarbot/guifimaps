@@ -169,7 +169,7 @@ foreach ($malles as $filename) {
                 	                $canal="eth";
 					$power=0;
                                 }
-				if ($canal="eth"){
+				if ($canal=="eth"){
 					$power=0;
 				}
 				if (array_key_exists('rtt', $vei["data"])){
