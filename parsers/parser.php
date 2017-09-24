@@ -119,6 +119,7 @@ foreach ($malles as $filename) {
 		}
 		$sql="INSERT INTO nodes(uid,id,gwmeshid,gwinetid,gdev,name,system,qmpversion,lon,lat,zona,timestamp_captura,timestamp_json) VALUES ('$uid', '$id', '".$gwmeshuid."','".$gwinetuid."', '$gdev', '$name', '$system','$qmpversion' , '$lon', '$lat','".$filename[1]."', '$timestamp','".$timestamp_json."')";
 		$mysqli->query($sql);
+		echo $sql."\n";
 		if (count($gwpath_uid)>0){
 			$sqltmp="insert into inet_paths(uid,gwpath,timestamp_captura) values ('".$uid."','".json_encode($gwpath_uid,JSON_FORCE_OBJECT)."','".$timestamp."')";
 			$mysqli->query($sqltmp);
