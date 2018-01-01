@@ -26,4 +26,4 @@ Objecte JSON que conté el timestamp de totes les captures: http://sants.guifi.n
 
 Retorna per la última captura http://sants.guifi.net/maps/export/captura.php
 
-Amb paràmetre timestamp per paràmetre retorna la captura anterior especificada: http://sants.guifi.net/maps/export/captura.php?timestamp=1514782506
+Amb paràmetre timestamp per paràmetre retorna la captura anterior especificada, per exemple: http://sants.guifi.net/maps/export/captura.php?timestamp=1514782506
