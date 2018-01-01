@@ -17,3 +17,13 @@ Crear una carpeta dins de `/var/log/` anomenada parsers i una entrada al cron qu
 # Demo
 
 http://sants.guifi.net/maps/
+
+## JSON export
+
+El mapa en qüestió posa a disposició l'accés de les dades via JSON
+
+Objecte JSON que conté el timestamp de totes les captures: http://sants.guifi.net/maps/export/timestamps.php
+
+Retorna per la última captura http://sants.guifi.net/maps/export/captura.php
+
+Amb paràmetre timestamp per paràmetre retorna la captura anterior especificada, per exemple: http://sants.guifi.net/maps/export/captura.php?timestamp=1514782506
