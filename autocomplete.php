@@ -11,7 +11,7 @@ if ($search!=""){
 	$sql2 = "SELECT distinct name,uid from nodes n where timestamp_captura='".$timestamp."' and n.name like '%".$search."%' order by uid ASC limit 10";
 	$result2 = $mysqli->query($sql2);?>
 	<ul id="resultat_cerca">
-	<?php
+	<?php 
 	while ($row2 = mysqli_fetch_array($result2)) {
 		$sql3 = "SELECT distinct name,uid from nodes n where uid=".$row2['uid']." and lat<>0 and lon<>0";
         	$result3 = $mysqli->query($sql3);
