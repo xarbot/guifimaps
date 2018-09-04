@@ -1,19 +1,21 @@
 <?php
-	include dirname(__FILE__).'/../functions.php';
-	date_default_timezone_set('Europe/Madrid');
-	$mysqli = mysql_link ();
+include dirname(__FILE__).'/../functions.php';
+date_default_timezone_set('Europe/Madrid');
+$mysqli = mysql_link ();
 
-        $sql = "SELECT timestamp_captura from nodes order by timestamp_captura DESC";
-        $result = $mysqli->query($sql);
-        $row=$result->fetch_assoc();
-        $last_timestamp=$row["timestamp_captura"];
-        $data_cerca=date('Y-m-d', strtotime('-2 day', time()));
+$sql = "SELECT timestamp_captura from nodes order by timestamp_captura DESC";
+$result = $mysqli->query($sql);
+$row=$result->fetch_assoc();
+$last_timestamp=$row["timestamp_captura"];
+$data_cerca=date('Y-m-d', strtotime('-2 day', time()));
+if(get_http_response_code('http://libremap.net/api/routers_by_mtime?startkey="'.$data_cerca.'"') == "200"){
         $url_map='http://libremap.net/api/routers_by_mtime?startkey="'.$data_cerca.'"';
         $json = file_get_contents($url_map);  
 
 	$data = json_decode($json, true);
 	$nodes= array();
 	foreach ($data["rows"] as $row) {
+	  if(get_http_response_code('http://libremap.net/api/router/'.$row["id"]) == "200"){
                 $json2 = file_get_contents('http://libremap.net/api/router/'.$row["id"]);   
                 $data2 = json_decode($json2, true);
 		$nodes[$row["id"]]=$data2;
@@ -114,8 +116,15 @@
                                 }
                         }
 		}
-	}
-	exit();
+          }
+       }
+}
+exit();
+
+
+
+
+
 	echo "----------------------------------------\n";
 	foreach ($data["rows"] as $row) {
 		$data2=$nodes[$row["id"]];
@@ -181,5 +190,6 @@
        	               } 
 		}
 	}
+
 ?>
 

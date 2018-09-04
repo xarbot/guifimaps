@@ -3,7 +3,7 @@ function mysql_link (){
         $host = "localhost";
         $username = "";
         $password = "";
-        $dbname = "maps_history";
+        $dbname = "maps_historic";
         $mysqli = new mysqli($host, $username, $password, $dbname);
 	return($mysqli);
 }

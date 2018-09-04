@@ -104,4 +104,8 @@ function correlacio($x, $y){
 	return $corr;
 }
 
+function get_http_response_code($theURL) {
+    $headers = get_headers($theURL);
+    return substr($headers[0], 9, 3);
+}
 ?>

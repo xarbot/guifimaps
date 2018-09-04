@@ -2,11 +2,12 @@
 include dirname(__FILE__).'/../functions.php';
 date_default_timezone_set('Europe/Madrid');
 $mysqli = mysql_link ();
+
 $malles = array(
 	    array('http://dsg.ac.upc.edu/qmpsu/download_json.php','1'),
 	    array('http://dsg.ac.upc.edu/qmpgsf/download_json.php','2'),
 	    array('http://dsg.ac.upc.edu/qmpvc/download_json.php','3'), 
-	    array('http://dsg.ac.upc.edu/qmprv/download_json.php','4'),  
+	    array('http://dsg.ac.upc.edu/qmprv/download_json.php','4'),
 	    array('http://dsg.ac.upc.edu/qmpp9/download_json.php','5'),
 	    array('http://dsg.ac.upc.edu/qmpquesa/download_json.php','6'),
 	    array('http://dsg.ac.upc.edu/qmpsa/download_json.php','7'),
@@ -22,6 +23,7 @@ $malles = array(
 $k=0;
 $timestamp="";
 foreach ($malles as $filename) {
+   if(get_http_response_code($filename[0]) == "200"){
 	$json = file_get_contents($filename[0]);   
 	//$json = str_replace('uid":', 'uid":'.$k, $json);
 	//$json = preg_replace('/uid":(\d+),/', 'uid":'.$k.'$1,', $json);
@@ -194,6 +196,7 @@ foreach ($malles as $filename) {
 			}	
 		}
 	}
+    }
 }
 $mysqli->close();
 excluded_links($timestamp);
